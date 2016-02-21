@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        0.2.0
-Release:        7.10%{?dist}
+Release:        7.11%{?dist}
 # Maven-shared defines maven-osgi version as 0.3.0
 Epoch:          1
 Summary:        Library for Maven-OSGi integration
@@ -20,10 +20,10 @@ Source0:        %{pkg_name}-%{version}.tar.xz
 Source1:        http://www.apache.org/licenses/LICENSE-2.0.txt
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-mvn(biz.aQute:bndlib)
-BuildRequires:  maven30-mvn(org.apache.maven.shared:maven-plugin-testing-harness)
-BuildRequires:  maven30-mvn(org.apache.maven.shared:maven-shared-components:pom:)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-project)
+BuildRequires:  %{?scl_prefix}mvn(biz.aQute:bndlib)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.shared:maven-plugin-testing-harness)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.shared:maven-shared-components:pom:)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-project)
 
 
 %description
@@ -40,7 +40,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 cp -p %{SOURCE1} LICENSE
 
@@ -50,14 +50,14 @@ cp -p %{SOURCE1} LICENSE
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Tests depend on binary JARs which were removed from sources
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -72,6 +72,9 @@ set -e -x
 
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1:0.2.0-7.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1:0.2.0-7.10
 - maven33 rebuild
 
