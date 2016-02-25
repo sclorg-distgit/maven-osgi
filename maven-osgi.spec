@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        0.2.0
-Release:        7.11%{?dist}
+Release:        7.12%{?dist}
 # Maven-shared defines maven-osgi version as 0.3.0
 Epoch:          1
 Summary:        Library for Maven-OSGi integration
@@ -19,7 +19,7 @@ Source0:        %{pkg_name}-%{version}.tar.xz
 # ASL mandates that the licence file be included in redistributed source
 Source1:        http://www.apache.org/licenses/LICENSE-2.0.txt
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}mvn(biz.aQute:bndlib)
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.shared:maven-plugin-testing-harness)
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.shared:maven-shared-components:pom:)
@@ -72,6 +72,9 @@ set -e -x
 
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1:0.2.0-7.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1:0.2.0-7.11
 - maven33 rebuild #2
 
